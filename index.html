@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Palang Tod: Zaroorat (S1 & S2)</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0f0f0f, #1a0010);
+    color: #fff;
+}
+
+:root {
+    --pink: #ff2e88;
+    --pink-light: #ff5ca8;
+}
+
+/* 🔥 HERO BANNER */
+header {
+    background: url('screenshots/banner.jpg') no-repeat center/cover;
+    height: 260px;
+    position: relative;
+}
+
+header::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, #0f0f0f, transparent);
+}
+
+header h1 {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 2;
+    background: rgba(0,0,0,0.6);
+    padding: 10px 16px;
+    border-left: 4px solid var(--pink);
+    border-radius: 6px;
+
+    font-size: clamp(22px, 5vw, 36px);
+    line-height: 1.2;
+    max-width: 90%;
+}
+
+/* CONTAINER */
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* 💎 GLASS CARD */
+.card {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(255,46,136,0.2);
+}
+
+/* HEADINGS */
+h2, h3 {
+    color: var(--pink-light);
+}
+
+/* BUTTONS */
+button {
+    border: none;
+    padding: 12px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 10px 5px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.download-btn {
+    background: linear-gradient(45deg, var(--pink), var(--pink-light));
+    color: white;
+    box-shadow: 0 0 15px rgba(255,46,136,0.5);
+}
+
+.backup-btn {
+    background: #444;
+    color: white;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* 📸 GALLERY */
+.screenshots {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+}
+
+.screenshots img {
+    width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.screenshots img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--pink);
+}
+
+/* MODAL */
+.modal {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.95);
+}
+
+.modal img {
+    max-width: 90%;
+    margin: 5% auto;
+    display: block;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>
+Palang Tod: Zaroorat 💗<br>
+<span style="font-size:0.7em;color:#ff5ca8;">(Season 1 & 2)</span>
+</h1>
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<p><b>Title:</b> Palang Tod: Zaroorat</p>
+<p><b>Genre:</b> 🔞 </p>
+<p><b>Release:</b> 2022 (S1: April | S2: September)</p>
+<p><b>Language:</b> Hindi</p>
+<p><b>Quality:</b> 1080p WEB-DL</p>
+<p><b>Audio:</b> AAC 2.0CH</p>
+<p><b>Format:</b> MKV</p>
+<p><b>Size:</b> Various</p>
+
+<h3>Storyline</h3>
+<p>
+Kamlesh is paralyzed and cared for by Savita. Their relationship takes a bold turn,
+leading to emotional and physical complexities. In Season 2, things become more intense
+when Umesh discovers their secret and starts blackmailing Savita, creating tension and drama.
+</p>
+
+<h3>Cast</h3>
+<ul>
+<li>Sharanya Jit Kaur (Savita)</li>
+<li>Neeraj Singh Rajput (Ganesh)</li>
+<li>Ravi Mishra (Kamlesh)</li>
+<li>Vaidehee Bhave (Tejaswini)</li>
+<li>Bhavesh Kantaria</li>
+<li>Gaurav Raaj (Umesh)</li>
+</ul>
+
+<!-- DOWNLOAD -->
+<button class="download-btn" onclick="startDownload()">Download</button>
+<button class="backup-btn" onclick="startBackup()">Backup Download</button>
+
+<div id="count"></div>
+
+</div>
+
+<!-- SCREENSHOTS -->
+<h2>Screenshots</h2>
+<div class="screenshots" id="gallery"></div>
+
+</div>
+
+<!-- IMAGE MODAL -->
+<div id="imgModal" class="modal" onclick="this.style.display='none'">
+<img id="modalImg">
+</div>
+
+<script>
+// 📸 LOAD IMAGES (1.jpg, 2.jpg...)
+const gallery = document.getElementById("gallery");
+
+for (let i = 1; i <= 70; i++) {
+    let img = document.createElement("img");
+    img.src = `screenshots/${i}.jpg`;
+    img.loading = "lazy";
+
+    img.onerror = () => img.remove();
+
+    img.onclick = () => {
+        document.getElementById("imgModal").style.display = "block";
+        document.getElementById("modalImg").src = img.src;
+    };
+
+    gallery.appendChild(img);
+}
+
+// ⬇ PRIMARY
+function startDownload() {
+    let t = 10;
+    let c = document.getElementById("count");
+
+    let timer = setInterval(() => {
+        t--;
+        c.innerHTML = "Opening download in " + t + " sec";
+
+        if (t <= 0) {
+            clearInterval(timer);
+            window.location.href = "YOUR_MAIN_LINK";
+        }
+    }, 1000);
+}
+
+// ⬇ BACKUP
+function startBackup() {
+    let t = 10;
+    let c = document.getElementById("count");
+
+    let timer = setInterval(() => {
+        t--;
+        c.innerHTML = "Opening backup in " + t + " sec";
+
+        if (t <= 0) {
+            clearInterval(timer);
+            window.location.href = "YOUR_BACKUP_LINK";
+        }
+    }, 1000);
+}
+</script>
+
+</body>
+</html>
